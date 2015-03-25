@@ -1,0 +1,35 @@
+{
+  "name": "ignite-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify app.js",
+    "start": "wzrd app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Tom",
+  "license": "ISC",
+  "browserify": {
+    "transform": [
+      "brfs",
+      "cssify"
+    ]
+  },
+  "devDependencies": {
+    "brfs": "^1.4.0",
+    "browserify": "^9.0.3",
+    "cssify": "^0.7.0",
+    "wzrd": "^1.2.1"
+  },
+  "dependencies": {
+    "dom-delegator": "^13.1.0",
+    "domify": "^1.3.2",
+    "immutable": "^3.6.4",
+    "map-values": "^1.0.1",
+    "page": "^1.6.1",
+    "value-event": "^5.1.0",
+    "virtual-dom": "^2.0.1"
+  }
+}
