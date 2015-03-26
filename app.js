@@ -44,7 +44,7 @@ document.body.appendChild(node)
 
 ee.on('render', function(state) {
   //console.log('beep');
-  console.log(state.get('href'))
+  //console.log(state.get('href'))
   var newTree = render(state)
   var patches = diff(tree, newTree)
   patch(node, patches)

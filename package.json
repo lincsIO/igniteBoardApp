@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "browserify app.js",
-    "start": "wzrd app",
+    "build": "browserify app.js -o public/bundle.js",
+    "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -24,6 +24,7 @@
     "wzrd": "^1.2.1"
   },
   "dependencies": {
+    "aws-sdk": "^2.1.19",
     "dom-delegator": "^13.1.0",
     "domify": "^1.3.2",
     "events-ex": "^1.1.2",
@@ -33,5 +34,10 @@
     "smokesignals": "0.0.7",
     "value-event": "^5.1.0",
     "virtual-dom": "^2.0.1"
+  },
+  "env": {
+    "key": "AKIAIOAOABBZCN7GC7SQ",
+    "secret": "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",
+    "bucket": "igniteboard"
   }
 }
