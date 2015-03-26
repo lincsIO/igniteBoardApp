@@ -2,6 +2,9 @@ var h = require('virtual-dom/h')
 var sendEvent = require('value-event/event')
 var sendSubmit = require('value-event/submit')
 var uploadComponent = require('./upload')
+var Firebase = require('firebase')
+
+var ref = new Firebase('https://igniteboard.firebaseio.com/posts')
 
 component.render = render
 module.exports = component
@@ -13,7 +16,9 @@ function component (state, ee) {
     ee.emit('render', state.set('href', value))
   }
   post = function (state, data) {
-    console.log(data)
+    data.url = state.get('photo_url')
+    ref.push(data)
+    ee.emit('render', state.set('href', '/main'))
   }
   uploadComponent(state, ee)
 }
