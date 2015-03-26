@@ -4,20 +4,16 @@ var sendEvent = require('value-event/event')
 component.render = render
 module.exports = component
 
-function component (state) {
-  // action handlers
-  // post photo
-  // share board
+var redirect = null
 
-}
-
-function redirect (state, value) {
-  console.log(state)
-  console.log(value)
-  state.set('href', value)
+function component (state, ee) {
+  redirect = function (state, value) {   
+    ee.emit('render', state.set('href', value))
+  }
 }
 
 function render (state) {
+  var r = redirect.bind(null, state)
   return h('.container', [
     h('img', { src: '//alpha.igniteboard.com/igniteboard.png' }),
     h('.row', [
@@ -28,12 +24,12 @@ function render (state) {
     ]), 
     h('.row', [
       h('button.button-primary.u-full-width', { 
-        'ev-click': sendEvent(redirect.bind(null, state), '/photos/new') 
+        'ev-click': sendEvent(r, '/photos/new') 
       }, 'Post Photo')
     ]),
     h('.row', [
       h('button.button-primary.u-full-width', { 
-        'ev-click': sendEvent(redirect.bind(null, state), '/boards/share') 
+        'ev-click': sendEvent(r, '/boards/share') 
       }, 'Share Board')
     ]) 
   ])

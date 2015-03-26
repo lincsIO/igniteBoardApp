@@ -8,9 +8,13 @@ document.head.appendChild(domify("<link href='//fonts.googleapis.com/css?family=
 
 var h = require('virtual-dom/h')
 var createElement = require('virtual-dom/create-element')
+var diff = require('virtual-dom/diff')
+var patch = require('virtual-dom/patch')
 var values = require('map-values')
 var Delegator = require('dom-delegator')
 var Immutable = require('immutable')
+var smokesignals = require('smokesignals');
+var ee = smokesignals.convert({});
 
 var state = Immutable.Map({
   href: '/main'
@@ -24,7 +28,7 @@ var components = {
 }
 
 values(components, function (v) { 
-  v(state) 
+  v(state, ee) 
 })
 
 
@@ -37,4 +41,13 @@ var tree = render(state)
 var node = createElement(tree)
 document.body.appendChild(node)
 
+
+ee.on('render', function(state) {
+  //console.log('beep');
+  console.log(state.get('href'))
+  var newTree = render(state)
+  var patches = diff(tree, newTree)
+  patch(node, patches)
+  tree = newTree
+})
 
